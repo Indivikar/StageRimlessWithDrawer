@@ -57,8 +57,7 @@ public class CContent implements Initializable, IWindowMax {
 		primaryStage.setIconified(true);
 	}
 	@FXML public void actionButtonWindowMax(){
-
-		setWindowMaxIcon(primaryStage, buttonWindowMax, shadowPane, mainAnchorPane);
+		setWindowMaxIcon(primaryStage, buttonWindowMax, shadowPane, mainAnchorPane, Start.hasShadowPane);
 	}
 	@FXML public void actionButtonWindowClose(){
 		primaryStage.close();

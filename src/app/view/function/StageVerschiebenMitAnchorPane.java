@@ -5,6 +5,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Robot;
 
+import app.Start;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
@@ -70,7 +71,7 @@ public class StageVerschiebenMitAnchorPane implements IWindowMax {
 		            	double mousePosYInProzent = yMouse / mainAnchorPane.getHeight();
 
 		            	// das Fenster wieder minimieren
-	            		setWindowMaxIcon(stage, buttonWindowMax, shadowPane, mainAnchorPane);
+	            		setWindowMaxIcon(stage, buttonWindowMax, shadowPane, mainAnchorPane, Start.hasShadowPane);
 
 	            		double neueFensterPosX = 0;
 	            		double neueFensterPosY = 0;

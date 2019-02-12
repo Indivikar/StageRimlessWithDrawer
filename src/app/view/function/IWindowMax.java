@@ -11,11 +11,11 @@ import javafx.stage.Stage;
 public interface IWindowMax {
 
 	
-	public default void setWindowMaxIcon(Stage stage, Button buttonWindowMax, AnchorPane mainAnchorPane) {
-		setWindowMaxIcon(stage, buttonWindowMax, null, mainAnchorPane);
+	public default void setWindowMaxIcon(Stage stage, Button buttonWindowMax, AnchorPane mainAnchorPane, boolean hasShadowPane) {
+		setWindowMaxIcon(stage, buttonWindowMax, null, mainAnchorPane, hasShadowPane);
 	}
 
-	public default void setWindowMaxIcon(Stage stage, Button buttonWindowMax, AnchorPane shadowPane, AnchorPane mainAnchorPane) {
+	public default void setWindowMaxIcon(Stage stage, Button buttonWindowMax, AnchorPane shadowPane, AnchorPane mainAnchorPane, boolean hasShadowPane) {
 		
 		stage.setMaximized(!stage.isMaximized());
 		
@@ -31,29 +31,33 @@ public interface IWindowMax {
 		if (shadowPane == null) {
 			return;
 		}
-		if(stage.isMaximized()){
-			shadowPane.setStyle("-fx-border-insets: 0; -fx-background-insets: 0;");
-//			ResizeHelper.removeResizeListener(stage, mainAnchorPane);
-		} else {
-			shadowPane.setStyle("-fx-border-insets: 23; -fx-background-insets: 23;");
-//			ResizeHelper.addResizeListener(stage, mainAnchorPane);
+		
+		if (hasShadowPane) {
+			if(stage.isMaximized()){
+				shadowPane.setStyle("-fx-border-insets: 0; -fx-background-insets: 0;");
+	//			ResizeHelper.removeResizeListener(stage, mainAnchorPane);
+			} else {
+				shadowPane.setStyle("-fx-border-insets: 23; -fx-background-insets: 23;");
+	//			ResizeHelper.addResizeListener(stage, mainAnchorPane);
+			}
 		}
 
+
 	}
 
 	
-	public default void setWindowMaxMitDoppelKlick(Stage stage, Button buttonWindowMax, AnchorPane mainAnchorPane) {
-		setWindowMaxMitDoppelKlick(stage, buttonWindowMax, null, mainAnchorPane);
+	public default void setWindowMaxMitDoppelKlick(Stage stage, Button buttonWindowMax, AnchorPane mainAnchorPane, boolean hasShadowPane) {
+		setWindowMaxMitDoppelKlick(stage, buttonWindowMax, null, mainAnchorPane, hasShadowPane);
 	}
 	
-	public default void setWindowMaxMitDoppelKlick(Stage stage, Button buttonWindowMax, AnchorPane shadowPane, AnchorPane mainAnchorPane) {
+	public default void setWindowMaxMitDoppelKlick(Stage stage, Button buttonWindowMax, AnchorPane shadowPane, AnchorPane mainAnchorPane, boolean hasShadowPane) {
 		
 		mainAnchorPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
 		    @Override
 		    public void handle(MouseEvent mouseEvent) {
 		        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
 		            if(mouseEvent.getClickCount() == 2){
-		            	setWindowMaxIcon(stage, buttonWindowMax, shadowPane, mainAnchorPane);
+		            	setWindowMaxIcon(stage, buttonWindowMax, shadowPane, mainAnchorPane, hasShadowPane);
 		            }
 		        }
 		    }

@@ -22,6 +22,9 @@ import javafx.stage.StageStyle;
 
 public class Start extends Application implements IWindowMax {
 
+	// Config
+	public static boolean hasShadowPane = false;
+	
 	private JFXDrawersStack drawersStack;
 	private JFXDrawer drawer;
 	private CMain controllerMain;	
@@ -62,7 +65,7 @@ public class Start extends Application implements IWindowMax {
 			drawersStack.setContent(content);
 			
 			
-			setWindowMaxMitDoppelKlick(primaryStage, controllerMain.getButtonWindowMax(), root, root);
+			setWindowMaxMitDoppelKlick(primaryStage, controllerMain.getButtonWindowMax(), root, root, hasShadowPane);
 			new StageVerschiebenMitAnchorPane(root, root, controllerMain.getButtonWindowMax(), primaryStage, false);
 			ResizeHelper.addResizeListener(primaryStage, root);
 			

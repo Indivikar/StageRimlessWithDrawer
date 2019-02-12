@@ -30,7 +30,7 @@ public class CMain implements Initializable, IWindowMax {
 	}
 	
 	@FXML public void actionButtonWindowMax(){
-		setWindowMaxIcon(primaryStage, buttonWindowMax, mainAnchorPane);
+		setWindowMaxIcon(primaryStage, buttonWindowMax, mainAnchorPane, Start.hasShadowPane);
 	}
 	
 	@FXML public void actionButtonWindowClose(){
