@@ -1,3 +1,30 @@
 .shadow { 
-  -fx-effect: dropshadow(three-pass-box, black, 10, 0, -3, 0);
+	 /*-fx-effect: dropshadow(three-pass-box, black, 0, 9, -5, 0);
+  	-fx-effect: dropshadow(three-pass-box, black, 0, 9, 0, -5);
+  	-fx-effect: dropshadow(three-pass-box, black, 0, 9, 0, 5);
+	-fx-effect: dropshadow(three-pass-box, black, 0.2, 1, 5.0, 0.0);*/
+	
+	
+  	-fx-effect: dropshadow(  three-pass-box  , rgba(0,0,0,0.5), 5, 0, 0,  0);
+}
+
+.border { 
+	-fx-border-width: 1;
+	-fx-border-color: black;
+}
+
+.shadow-right { 
+  	-fx-effect: dropshadow(  three-pass-box  , rgba(0,0,0,0.5), 2, 0, 2.0,  0.0);
+}
+
+.shadow-left { 
+  	-fx-effect: dropshadow(  three-pass-box  , rgba(0,0,0,0.5), 2, 0, -2.0,  0.0);
+}
+
+.shadow-top { 
+  	-fx-effect: dropshadow(  three-pass-box  , rgba(0,0,0,0.5), 2, 0, 0,  -2.0);
+}
+
+.shadow-bottom { 
+  	-fx-effect: dropshadow(  three-pass-box  , rgba(0,0,0,0.5), 2, 0, 0,  2.0);
 }

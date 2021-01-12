@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXDrawer.DrawerDirection;
 import app.controller.CContent;
 import app.controller.CDrawerContent;
 import app.controller.CMain;
+import app.controller.CMainMenu;
 import app.view.function.IWindowMax;
 import app.view.function.ResizeHelper;
 import app.view.function.StageVerschiebenMitAnchorPane;
@@ -22,6 +23,16 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+// Icons as SVG
+//	https://labs.mapbox.com/maki-icons/editor/
+//	https://feathericons.com/?query=home
+
+//Icons as PNG
+//	https://ionicons.com/v2/
+
+// SVG to PNG
+//	https://cloudconvert.com/svg-to-png
+	
 public class Start extends Application implements IWindowMax {
 
 	// Config
@@ -33,7 +44,9 @@ public class Start extends Application implements IWindowMax {
 	private CMain controllerMain;	
 	
 	private CContent controllerContent;
+	private CMainMenu controllerDrawerMenuContent;
 	private CDrawerContent controllerDrawerContent;
+
 	
 	@Override
 	public void start(Stage primaryStage)  {
@@ -52,20 +65,29 @@ public class Start extends Application implements IWindowMax {
 			FXMLLoader loaderDrawerContent = new FXMLLoader(Start.class.getResource("view/fxml/drawerContent.fxml"));			
 	        AnchorPane drawerContent = loaderDrawerContent.load();
 	        
-	        drawerMenu = addContentInDrawerMenu(drawerMenuContent);
-	        drawer = addContentInDrawer(drawerContent);
-	        
-	        
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(Start.class.getResource("/app/view/css/MainStyle.css").toExternalForm());
-
+			scene.getStylesheets().add(Start.class.getResource("/app/view/css/mainMenu.css").toExternalForm());
+	        
+	        drawerMenu = addContentInDrawerMenu(drawerMenuContent);	        
+	        drawer = addContentInDrawer(drawerContent);
+	        
 			controllerMain = loaderRoot.getController();
-			controllerMain.set(this, primaryStage);
+			
 	
 			controllerContent = loaderContent.getController();
-			controllerContent.set(this, primaryStage);
+			
+			
+			controllerDrawerMenuContent = loaderDrawerMenu.getController();
+			
 			
 			controllerDrawerContent = loaderDrawerContent.getController();
+			
+			
+			
+			controllerMain.set(this, primaryStage);
+			controllerContent.set(this, primaryStage);
+			controllerDrawerMenuContent.set(this, primaryStage);
 			controllerDrawerContent.set(this, primaryStage);
 			
 			// Set content in DrawersStack
@@ -107,7 +129,7 @@ public class Start extends Application implements IWindowMax {
         drawer.setDefaultDrawerSize(500);
         drawer.setSidePane(drawerContent);
         drawer.setOverLayVisible(false);
-        drawer.setResizableOnDrag(true);        
+        drawer.setResizableOnDrag(true);
 		return drawer;
 	}
     
@@ -118,13 +140,12 @@ public class Start extends Application implements IWindowMax {
         drawer.setSidePane(drawerContent);
         drawer.setOverLayVisible(false);
         drawer.setResizableOnDrag(true);
-        
-        
 		return drawer;
 	}
     
     // Getter
 	public CMain getControllerDrawersStack() {return controllerMain;}
+	public CMainMenu getControllerDrawerMenuContent() {return controllerDrawerMenuContent;}
 	public JFXDrawer getDrawer() {return drawer;}
 	public JFXDrawer getDrawerMenu() {return drawerMenu;}
 
