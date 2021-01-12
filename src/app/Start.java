@@ -15,8 +15,10 @@ import app.view.function.StageVerschiebenMitAnchorPane;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -27,12 +29,12 @@ public class Start extends Application implements IWindowMax {
 	
 	private JFXDrawersStack drawersStack;
 	private JFXDrawer drawer;
+	private JFXDrawer drawerMenu;
 	private CMain controllerMain;	
 	
 	private CContent controllerContent;
 	private CDrawerContent controllerDrawerContent;
 	
-
 	@Override
 	public void start(Stage primaryStage)  {
 		try {
@@ -43,10 +45,16 @@ public class Start extends Application implements IWindowMax {
 		
 			FXMLLoader loaderContent  = new FXMLLoader(Start.class.getResource("view/fxml/content.fxml"));			
 			AnchorPane content = loaderContent.load();
-        
+
+			FXMLLoader loaderDrawerMenu = new FXMLLoader(Start.class.getResource("view/fxml/mainMenu.fxml"));			
+	        AnchorPane drawerMenuContent = loaderDrawerMenu.load();
+			
 			FXMLLoader loaderDrawerContent = new FXMLLoader(Start.class.getResource("view/fxml/drawerContent.fxml"));			
 	        AnchorPane drawerContent = loaderDrawerContent.load();
+	        
+	        drawerMenu = addContentInDrawerMenu(drawerMenuContent);
 	        drawer = addContentInDrawer(drawerContent);
+	        
 	        
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(Start.class.getResource("/app/view/css/MainStyle.css").toExternalForm());
@@ -63,7 +71,7 @@ public class Start extends Application implements IWindowMax {
 			// Set content in DrawersStack
 			this.drawersStack = controllerMain.getDrawersStack();
 			drawersStack.setContent(content);
-			
+//			drawersStack.setPadding(new Insets(34, 0, 10, 0));
 			
 			setWindowMaxMitDoppelKlick(primaryStage, controllerMain.getButtonWindowMax(), root, root, hasShadowPane);
 			new StageVerschiebenMitAnchorPane(root, root, controllerMain.getButtonWindowMax(), primaryStage, false);
@@ -78,7 +86,7 @@ public class Start extends Application implements IWindowMax {
 			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(true);
-			primaryStage.setX(6000);
+			//primaryStage.setX(6000);
 			primaryStage.setY(10);		
 			primaryStage.show();
 		
@@ -99,7 +107,18 @@ public class Start extends Application implements IWindowMax {
         drawer.setDefaultDrawerSize(500);
         drawer.setSidePane(drawerContent);
         drawer.setOverLayVisible(false);
+        drawer.setResizableOnDrag(true);        
+		return drawer;
+	}
+    
+    private JFXDrawer addContentInDrawerMenu(AnchorPane drawerContent) {
+    	JFXDrawer drawer = new JFXDrawer();
+        drawer.setDirection(DrawerDirection.LEFT);
+        drawer.setDefaultDrawerSize(200);
+        drawer.setSidePane(drawerContent);
+        drawer.setOverLayVisible(false);
         drawer.setResizableOnDrag(true);
+        
         
 		return drawer;
 	}
@@ -107,6 +126,7 @@ public class Start extends Application implements IWindowMax {
     // Getter
 	public CMain getControllerDrawersStack() {return controllerMain;}
 	public JFXDrawer getDrawer() {return drawer;}
+	public JFXDrawer getDrawerMenu() {return drawerMenu;}
 
 	public static void main(String[] args) {
         launch(args);

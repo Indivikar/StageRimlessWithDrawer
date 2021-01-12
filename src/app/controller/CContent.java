@@ -30,6 +30,7 @@ public class CContent implements Initializable, IWindowMax {
 	private Stage primaryStage;
 	private JFXDrawersStack drawersStack;
 	private JFXDrawer drawer;
+//	private JFXDrawer drawer2;
 	
 	private MyNotification notification;
 	private MyNotificationPane notificationPane;
@@ -75,7 +76,7 @@ public class CContent implements Initializable, IWindowMax {
 	private void addActionButtons() {
 		Platform.runLater(()->{
 			buttonDrawer.setOnAction(e -> {
-				drawersStack.toggle(drawer);				
+				drawersStack.toggle(drawer);					
 			});
 		});
 		
@@ -122,7 +123,7 @@ public class CContent implements Initializable, IWindowMax {
 		this.primaryStage = primaryStage;		
 		this.drawersStack = start.getControllerDrawersStack().getDrawersStack();
 		this.drawer = start.getDrawer();
-
+		
 		addActionButtons();
 		
 	}

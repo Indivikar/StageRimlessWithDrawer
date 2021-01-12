@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="drawerBG" prefWidth="500.0" stylesheets="@../css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.CDrawerContent">
+<AnchorPane id="drawerBG" prefWidth="500.0" stylesheets="@../css/MainStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.CDrawerContent">
    <children>
       <HBox id="menuBar-node" alignment="TOP_RIGHT" prefHeight="22.0" prefWidth="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
