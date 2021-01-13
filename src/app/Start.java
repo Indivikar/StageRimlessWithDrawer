@@ -6,6 +6,8 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXDrawer.DrawerDirection;
 
+import app.handler.PageHandler;
+import app.handler.PageHandler.Page;
 import app.controller.CContent;
 import app.controller.CDrawerContent;
 import app.controller.CMain;
@@ -47,18 +49,17 @@ public class Start extends Application implements IWindowMax {
 	private CMainMenu controllerDrawerMenuContent;
 	private CDrawerContent controllerDrawerContent;
 
+	private PageHandler pageHandler;
+
 	
 	@Override
 	public void start(Stage primaryStage)  {
 		try {
 			Platform.setImplicitExit(false);
-			
+
 			FXMLLoader loaderRoot  = new FXMLLoader(Start.class.getResource("view/fxml/main.fxml"));			
 	        AnchorPane root = loaderRoot.load();
-		
-			FXMLLoader loaderContent  = new FXMLLoader(Start.class.getResource("view/fxml/content.fxml"));			
-			AnchorPane content = loaderContent.load();
-
+	
 			FXMLLoader loaderDrawerMenu = new FXMLLoader(Start.class.getResource("view/fxml/mainMenu.fxml"));			
 	        AnchorPane drawerMenuContent = loaderDrawerMenu.load();
 			
@@ -72,28 +73,19 @@ public class Start extends Application implements IWindowMax {
 	        drawerMenu = addContentInDrawerMenu(drawerMenuContent);	        
 	        drawer = addContentInDrawer(drawerContent);
 	        
-			controllerMain = loaderRoot.getController();
-			
-	
-			controllerContent = loaderContent.getController();
-			
-			
+			controllerMain = loaderRoot.getController();			
 			controllerDrawerMenuContent = loaderDrawerMenu.getController();
-			
-			
 			controllerDrawerContent = loaderDrawerContent.getController();
-			
-			
-			
+						
 			controllerMain.set(this, primaryStage);
-			controllerContent.set(this, primaryStage);
 			controllerDrawerMenuContent.set(this, primaryStage);
 			controllerDrawerContent.set(this, primaryStage);
 			
 			// Set content in DrawersStack
 			this.drawersStack = controllerMain.getDrawersStack();
-			drawersStack.setContent(content);
-//			drawersStack.setPadding(new Insets(34, 0, 10, 0));
+			
+			this.pageHandler = new PageHandler(this, primaryStage, drawersStack);
+			pageHandler.setPage(Page.Home);
 			
 			setWindowMaxMitDoppelKlick(primaryStage, controllerMain.getButtonWindowMax(), root, root, hasShadowPane);
 			new StageVerschiebenMitAnchorPane(root, root, controllerMain.getButtonWindowMax(), primaryStage, false);
@@ -144,13 +136,14 @@ public class Start extends Application implements IWindowMax {
 	}
     
     // Getter
-	public CMain getControllerDrawersStack() {return controllerMain;}
+	public CMain getControllerMain() {return controllerMain;}
 	public CMainMenu getControllerDrawerMenuContent() {return controllerDrawerMenuContent;}
 	public JFXDrawer getDrawer() {return drawer;}
 	public JFXDrawer getDrawerMenu() {return drawerMenu;}
+	public PageHandler getPageHandler() {return pageHandler;}
 
 	public static void main(String[] args) {
-        launch(args);
+        launch(args);            
     }
 
 }

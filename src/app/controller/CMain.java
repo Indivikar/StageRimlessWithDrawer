@@ -9,21 +9,19 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 
 import app.Start;
+import app.handler.PageHandler.Page;
+import app.nodes.ButtonMenuIcon;
+import app.nodes.ButtonMenuText;
 import app.view.function.IWindowMax;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class CMain implements Initializable, IWindowMax {
 
@@ -31,9 +29,13 @@ public class CMain implements Initializable, IWindowMax {
 	private Stage primaryStage;
 	
 	private JFXDrawer drawerMenu;
+	private HamburgerBackArrowBasicTransition transition;
+	
 	private CMainMenu controllerDrawerMenuContent;
 	
 	@FXML private AnchorPane mainAnchorPane;
+	
+	@FXML private Label labelTitle;
 	
 	@FXML private JFXDrawersStack drawersStack;
 	@FXML private JFXDrawersStack drawersStackMenu;
@@ -59,68 +61,18 @@ public class CMain implements Initializable, IWindowMax {
 		System.exit(0);
 	}
 	
-	private Image IMG = new Image(Start.class.getResourceAsStream("view/images/mainMenu/aerialway-15.png")); 
-	
-	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
+	}
 
-	}
-	
-	private void initDrawerMainMenu() {
-		
-		HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburgerMenu);
-			
-		hamburgerMenu.addEventHandler(MouseEvent.MOUSE_PRESSED, (e)->{
-
-//			drawersStack.toggle(drawerMenu);
-			
-			transition.setOnFinished(ev -> {				
-				if (transition.getRate() == -1.0) {
-					drawersStackMenu.setVisible(false);	
-				}									
-			});
-			
-			if (drawerMenu.isOpened()) {
-				drawersStackMenu.toggle(drawerMenu);
-				transition.setRate(-1.0);				
-			} else {
-				drawersStackMenu.setVisible(true);
-				drawersStackMenu.toggle(drawerMenu);
-				transition.setRate(1.0);
-			}
-			
-			transition.play();
-			
-		});
-	}
-	
-	private void addMenuContent() {
-		menuContent(IMG, "Home");
-		menuContent(IMG, "Registraturplan");
-		menuContent(IMG, "MultiTop");
-		menuContent(IMG, "ProtoTop");
-	}
-	
-	
-	private void menuContent(Image image, String Text) {
-		
-		Button buttonText = new Button(Text);
-		
-		ImageView iv = new ImageView(image);
-		Button buttonIcon = new Button();
-		buttonIcon.setGraphic(iv);
-				
-		vBoxMenuIcons.getChildren().add(buttonIcon);
-		controllerDrawerMenuContent.getVBoxMainMenuText().getChildren().add(buttonText);
-	}
-	
-	
 	// Getter
 	public JFXDrawersStack getDrawersStack() {return drawersStack;}
+	public JFXDrawersStack getDrawersStackMenu() {return drawersStackMenu;}
 	public Button getButtonWindowMax() {return buttonWindowMax;}
 	public VBox getVBoxMenuIcons() {return vBoxMenuIcons;}
+	public Label getLabelTitle() {return labelTitle;}
+	public JFXHamburger getHamburgerMenu() {return hamburgerMenu;}
 
 	// Setter
 	public void set(Start startTest, Stage primaryStage) {
@@ -128,9 +80,6 @@ public class CMain implements Initializable, IWindowMax {
 		this.primaryStage = primaryStage;
 		this.drawerMenu = start.getDrawerMenu();
 		this.controllerDrawerMenuContent = start.getControllerDrawerMenuContent();
-		initDrawerMainMenu();
-		
-		addMenuContent();
 	}
 	
 

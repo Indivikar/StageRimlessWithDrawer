@@ -1,5 +1,6 @@
 package app.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -14,6 +15,7 @@ import app.view.function.MyNotification;
 import app.view.function.MyNotification.MyNotificationGraphic;
 import app.view.function.MyNotificationPane;
 import app.view.function.MyNotificationPane.MyNotificationPaneGraphic;
+import ikonli.iconfinder.IkonliIconFinderApplication;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -47,6 +49,7 @@ public class CContent implements Initializable, IWindowMax {
 	@FXML private Button buttonNotiBottomLeft;
 	@FXML private Button buttonNotiPaneTop;
 	@FXML private Button buttonNotiPaneBottom;
+	@FXML private Button buttonIconFinder;
 	
 //	@FXML JFXDrawersStack drawersStack;
 //	@FXML JFXDrawer drawer;
@@ -97,6 +100,16 @@ public class CContent implements Initializable, IWindowMax {
 			notificationPane.create(primaryStage, false, MyNotificationPaneGraphic.GEAR, "text 2");			
 		});
 		
+		buttonIconFinder.setOnAction(e -> {
+			IkonliIconFinderApplication iconFinder =  new IkonliIconFinderApplication();
+			try {
+				iconFinder.start(new Stage());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
 	}
 	
 	public void showNotificationPane(Stage stage) {
@@ -121,7 +134,7 @@ public class CContent implements Initializable, IWindowMax {
 	public void set(Start start, Stage primaryStage) {
 		this.start = start;
 		this.primaryStage = primaryStage;		
-		this.drawersStack = start.getControllerDrawersStack().getDrawersStack();
+		this.drawersStack = start.getControllerMain().getDrawersStack();
 		this.drawer = start.getDrawer();
 		
 		addActionButtons();

@@ -13,6 +13,7 @@
             <Button fx:id="buttonNotiBottomLeft" mnemonicParsing="false" text="Notification Bottom left" />
             <Button fx:id="buttonNotiPaneTop" mnemonicParsing="false" text="Notification Pane Top" />
             <Button fx:id="buttonNotiPaneBottom" mnemonicParsing="false" text="Notification Pane Bottom" />
+            <Button fx:id="buttonIconFinder" mnemonicParsing="false" text="Ikonli Icon-Finder" />
          </children>
       </VBox>
    </children>

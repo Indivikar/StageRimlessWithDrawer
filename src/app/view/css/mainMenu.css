@@ -28,3 +28,21 @@
 .shadow-bottom { 
   	-fx-effect: dropshadow(  three-pass-box  , rgba(0,0,0,0.5), 2, 0, 0,  2.0);
 }
+
+.button-mainmenu
+{
+	-fx-pref-height: 70px;
+    -fx-pref-width: 200px;
+    -fx-background-color: transparent;
+}
+
+.button-mainmenu:buttonHover
+{
+	-fx-background-color: #2492e0;
+}
+ 
+.button-mainmenu:buttonPressed
+{
+  -fx-background-color: #2369B5;
+}
+ 
