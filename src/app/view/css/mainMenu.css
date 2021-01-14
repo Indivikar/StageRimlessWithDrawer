@@ -46,3 +46,7 @@
   -fx-background-color: #2369B5;
 }
  
+.button-mainmenu:buttonSelected
+{
+	-fx-background-color: #2492e0;
+}

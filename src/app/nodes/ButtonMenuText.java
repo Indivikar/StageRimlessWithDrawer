@@ -17,16 +17,23 @@ public class ButtonMenuText extends Button {
 
 	private static PseudoClass PSEUDO_CLASS_HOVER = PseudoClass.getPseudoClass("buttonHover");
 	private static PseudoClass PSEUDO_CLASS_PRESSED = PseudoClass.getPseudoClass("buttonPressed");
-  
+	private static PseudoClass PSEUDO_CLASS_SELECTED = PseudoClass.getPseudoClass("buttonSelected");
+	  
 	private BooleanProperty hover;
 	private BooleanProperty pressed;
+	private BooleanProperty selected;
 	
-  
-	public ButtonMenuText(String text, Page page) {
+	private String name;
+	private Page page;
 
+	
+	public ButtonMenuText(String name, Page page) {
+		this.name = name;
+		this.page = page;
+		
 		String font = "Verdana";
 		
-		Text t = new Text (text);
+		Text t = new Text (name);
 		t.setFont(Font.font(font, FontWeight.NORMAL, 20));
 		t.setFill(Color.BLACK);
 				
@@ -36,17 +43,14 @@ public class ButtonMenuText extends Button {
 	
 		hover = new SimpleBooleanProperty(false);
 		hover.addListener((ov, oldVal, newVal) -> {
-			pseudoClassStateChanged(PSEUDO_CLASS_HOVER, hover.get());
-			
-			if (newVal) {
+			pseudoClassStateChanged(PSEUDO_CLASS_HOVER, hover.get());		
+			if (newVal || selected.get()) {
 				t.setFill(Color.SNOW);			
 				t.setFont(Font.font(font, FontWeight.NORMAL, 22));
 			} else {
 				t.setFill(Color.BLACK);
 				t.setFont(Font.font(font, FontWeight.NORMAL, 20));
-			}
-			
-			
+			}						
 		});
 
 		pressed = new SimpleBooleanProperty(false);
@@ -59,17 +63,34 @@ public class ButtonMenuText extends Button {
 			}
 		});
 		
+		selected = new SimpleBooleanProperty(false);
+		selected.addListener((ov, oldVal, newVal) -> {
+			pseudoClassStateChanged(PSEUDO_CLASS_SELECTED, selected.get());
+			if (newVal) {
+				t.setFill(Color.SNOW);			
+				t.setFont(Font.font(font, FontWeight.NORMAL, 22));
+			} else {
+				t.setFill(Color.BLACK);
+				t.setFont(Font.font(font, FontWeight.NORMAL, 20));
+			}	
+		});
+		
 		getStyleClass().add("button-mainmenu");
 	}
-  
-  
+	
+	public String getName() {return name;}
+	public Page getPage() {return page;}
+	
 	public boolean isButtonHover() {return this.hover.get();}
 	public boolean isButtonPressed() {return this.pressed.get();}
+	public boolean isButtonSelected() {return this.selected.get();}
 	
 	public void setButtonHover(boolean hover) {this.hover.set(hover);}
 	public void setButtonPressed(boolean pressed) {this.pressed.set(pressed);}
+	public void setButtonSelected(boolean selected) {this.selected.set(selected);}
 	
 	public BooleanProperty getHoverProp() {return hover;}
 	public BooleanProperty getPressedProp() {return pressed;}
+	public BooleanProperty getSelectedProp() {return selected;}
 	   
 }

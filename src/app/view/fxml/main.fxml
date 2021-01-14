@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" styleClass="border" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.CMain">
+<AnchorPane id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" styleClass="border" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.CMain">
    <children>
       <JFXDrawersStack fx:id="drawersStack" layoutX="72.0" layoutY="35.0" AnchorPane.bottomAnchor="11.400000000000091" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="0.40000000000009095" AnchorPane.topAnchor="35.0" />
       <JFXDrawersStack fx:id="drawersStackMenu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="210.0" styleClass="shadow" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="69.0" AnchorPane.topAnchor="0.0" />
@@ -31,7 +31,7 @@
       </AnchorPane>
       <AnchorPane prefWidth="5000.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" prefHeight="34.0" text="Demo" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <Label fx:id="labelTitle" alignment="CENTER" prefHeight="34.0" text="Demo" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font size="18.0" />
                </font>

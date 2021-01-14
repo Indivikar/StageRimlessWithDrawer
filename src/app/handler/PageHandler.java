@@ -10,7 +10,12 @@ import app.controller.CMain;
 import app.controller.CMultiTop;
 import app.controller.CProtoTop;
 import app.controller.CRegistraturplan;
+import app.nodes.ButtonMenuIcon;
+import app.nodes.ButtonMenuText;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -36,12 +41,19 @@ public class PageHandler {
 	private CProtoTop controllerPT;
 	
 	private StackPane contentPane;
+	
+	private ObservableList<Node> listButtonIcon;
+	private ObservableList<Node> listButtonText;
 
+	
 	public PageHandler(Start start, Stage primaryStage, JFXDrawersStack drawersStack) {		
 		this.start = start;	
 		this.primaryStage = primaryStage;
 		this.drawersStack = drawersStack;
 				
+		this.listButtonIcon = start.getControllerMain().getVBoxMenuIcons().getChildren();
+		this.listButtonText = start.getControllerDrawerMenuContent().getVBoxMainMenuText().getChildren();
+
 		contentPane = new StackPane();
 		drawersStack.setContent(contentPane);
 		
@@ -94,7 +106,34 @@ public class PageHandler {
 			default:
 				break;
 		}
-
+		
+		setSelectedMenuItem(page);
 	}
+	
+	private void setSelectedMenuItem(Page page) {
+		for (Node node : listButtonIcon) {
+			if (node instanceof Button) {
+				ButtonMenuIcon buttonIcon = ((ButtonMenuIcon) node);
+				if(buttonIcon.getPage().equals(page)) {
+					buttonIcon.setButtonSelected(true);
+				} else {
+					buttonIcon.setButtonSelected(false);
+				}				
+			}
+		}
+		
+		for (Node node : listButtonText) {
+			if (node instanceof Button) {
+				ButtonMenuText buttonText = ((ButtonMenuText) node);
+				if(buttonText.getPage().equals(page)) {
+					buttonText.setButtonSelected(true);
+				} else {
+					buttonText.setButtonSelected(false);
+				}				
+			}
+		}		
+	}
+	
+	
 	
 }

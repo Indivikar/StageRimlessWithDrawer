@@ -17,17 +17,24 @@ public class ButtonMenuIcon extends Button {
 
 	private static PseudoClass PSEUDO_CLASS_HOVER = PseudoClass.getPseudoClass("buttonHover");
 	private static PseudoClass PSEUDO_CLASS_PRESSED = PseudoClass.getPseudoClass("buttonPressed");
+	private static PseudoClass PSEUDO_CLASS_SELECTED = PseudoClass.getPseudoClass("buttonSelected");
   
 	private BooleanProperty hover;
 	private BooleanProperty pressed;
+	private BooleanProperty selected;
 	  
-	  
-	public ButtonMenuIcon(String id, String color, int size, String text, Page page) {
+	private String name;
+	private Page page;
+	
+	
+	public ButtonMenuIcon(String id, String color, int size, String name, Page page) {		
+		this.name = name;
+		this.page = page;
 		
 		FontIcon icon = customizeIkon(id, color, size);
 		
 		setGraphic(icon);
-		setTooltip(new Tooltip(text));
+		setTooltip(new Tooltip(name));
 
 		hover = new SimpleBooleanProperty(false);
 		hover.addListener(e -> pseudoClassStateChanged(PSEUDO_CLASS_HOVER, hover.get()));
@@ -42,6 +49,9 @@ public class ButtonMenuIcon extends Button {
 			}
 		});
 		
+		selected = new SimpleBooleanProperty(false);
+		selected.addListener(e -> pseudoClassStateChanged(PSEUDO_CLASS_SELECTED, selected.get()));
+		
 		getStyleClass().add("button-mainmenu");
 	}
 	  
@@ -51,14 +61,20 @@ public class ButtonMenuIcon extends Button {
         fontIcon.setIconColor(Color.web(color));       
         return fontIcon;
     }
-	  
+    
+	public String getName() {return name;}
+	public Page getPage() {return page;}
+	     
 	public boolean isButtonHover() {return this.hover.get();}
 	public boolean isButtonPressed() {return this.pressed.get();}
+	public boolean isButtonSelected() {return this.selected.get();}
 	
 	public void setButtonHover(boolean hover) {this.hover.set(hover);}
 	public void setButtonPressed(boolean pressed) {this.pressed.set(pressed);}
+	public void setButtonSelected(boolean selected) {this.selected.set(selected);}
 	
 	public BooleanProperty getHoverProp() {return hover;}
 	public BooleanProperty getPressedProp() {return pressed;}
+	public BooleanProperty getSelectedProp() {return selected;}
 	   
 }
